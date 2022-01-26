@@ -24,7 +24,7 @@ def main():
          transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])])
 
     # load image
-    img_path = "./xxx.jpg"
+    img_path = "./predict/test_right.bmp"
     assert os.path.exists(img_path), "file: '{}' dose not exist.".format(img_path)
     img = Image.open(img_path)
     plt.imshow(img)
@@ -36,7 +36,7 @@ def main():
     print(img)
 
     # read class_indict
-    json_path = './class_indices.json'
+    json_path = './predict/class_indices.json'
     assert os.path.exists(json_path), "file: '{}' dose not exist.".format(json_path)
 
     json_file = open(json_path, "r")
@@ -45,7 +45,7 @@ def main():
     # create model
     model = create_model(num_classes=2).to(device)
     # load model weights
-    model_weight_path = "./weights/model-58.pth"
+    model_weight_path = "./weights/model-8.pth"
     model.load_state_dict(torch.load(model_weight_path, map_location=device))
     model.eval()
     with torch.no_grad():
@@ -58,8 +58,6 @@ def main():
                                                  predict[predict_cla].numpy())
     plt.title(print_res)
     print(print_res)
-    plt.show()
-
 
 if __name__ == '__main__':
     main()
